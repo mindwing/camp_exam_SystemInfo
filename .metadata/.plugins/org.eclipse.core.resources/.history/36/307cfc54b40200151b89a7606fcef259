@@ -1,0 +1,40 @@
+package com.example.camp_exam_systeminfo;
+
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+
+public class MainActivity extends ActionBarActivity {
+
+	private TextView info;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		info = (TextView) findViewById(R.id.info);
+	}
+
+	public void getSystemInfo() {
+		// 하드웨어 정보 - CPU, 제조사, 모델명, 시리얼번호, 버전
+		String strMessage = "Board: " + Build.BOARD + "\nModel: " + Build.MODEL
+				+ "\nBrand: " + Build.BRAND + "\nModel: " + Build.MODEL
+				+ "\nSerial: " + Build.SERIAL + "\nVersion: "
+				+ Build.VERSION.RELEASE;
+
+		// 모니터 정보 - 픽셀 개수, 해상도, 물리적인 길이
+		DisplayMetrics disMetrics = getResources().getDisplayMetrics();
+		strMessage += "\nDisplay Width: " + disMetrics.widthPixels
+				+ "\nDisplay Height: " + disMetrics.heightPixels
+				+ "\nDensityDpi: " + disMetrics.densityDpi
+				+ "\nHorizental Size: " + (float) disMetrics.widthPixels
+				/ (float) disMetrics.densityDpi + "\nVertical Size: "
+				+ (float) disMetrics.heightPixels
+				/ (float) disMetrics.densityDpi;
+	}
+}

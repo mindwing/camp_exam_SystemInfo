@@ -1,35 +1,47 @@
 package com.example.camp_exam_systeminfo;
 
-import android.support.v7.app.ActionBarActivity;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
+import android.support.v7.app.ActionBarActivity;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+	private TextView tvInfo;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+		tvInfo = (TextView) findViewById(R.id.info);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		String sysInfo = getSystemInfo();
+		tvInfo.setText(sysInfo);
+	}
+
+	public String getSystemInfo() {
+		String sysInfo = "BOARD: " + Build.BOARD;
+		sysInfo += "\nBOOTLOADER: " + Build.BOOTLOADER;
+		sysInfo += "\nBRAND: " + Build.BRAND;
+		sysInfo += "\nDEVICE: " + Build.DEVICE;
+		sysInfo += "\nHARDWARE: " + Build.HARDWARE;
+		sysInfo += "\nHOST: " + Build.HOST;
+		sysInfo += "\nID: " + Build.ID;
+		sysInfo += "\nMANUFACTURER: " + Build.MANUFACTURER;
+		sysInfo += "\nMODEL: " + Build.MODEL;
+		sysInfo += "\nPRODUCT: " + Build.PRODUCT;
+		sysInfo += "\nSERIAL: " + Build.SERIAL;
+		sysInfo += "\nTAGS: " + Build.TAGS;
+		sysInfo += "\nTIME: " + Build.TIME;
+		sysInfo += "\nTYPE: " + Build.TYPE;
+		sysInfo += "\nUSER: " + Build.USER;
+
+		return sysInfo;
+	}
 }
